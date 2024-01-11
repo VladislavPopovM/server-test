@@ -4,7 +4,10 @@ import requests
 import os
 
 app = Flask(__name__)
+print("Before loading .env: ", os.getenv("EXTERNAL_SERVICE_URL"))
 load_dotenv()
+print("After loading .env: ", os.getenv("EXTERNAL_SERVICE_URL"))
+
 
 def get_external_version():
     """Sends a GET request to an external service and returns the response."""
