@@ -1,15 +1,31 @@
 from flask import Flask, request
+import requests
+import os
 
 app = Flask(__name__)
+
+def get_external_version():
+    """Sends a GET request to an external service and returns the response."""
+    external_url = os.getenv('EXTERNAL_SERVICE_URL')  # Get URL from environment variable
+    if not external_url:
+        return "External service URL not configured"
+
+    try:
+        response = requests.get(external_url)
+        return response.text
+    except requests.RequestException as e:
+        return f"Error making request to external service: {e}"
 
 @app.route('/version', methods=['GET', 'POST'])
 def version():
     if request.method == 'POST':
-        # Обработка входящего запроса
+        # Processing incoming POST request
         data = request.json
-        return "Get Data: " + str(data)
+        return "Data received: " + str(data)
     else:
-        return "Get request"
+        # Processing GET request - send a request to an external service
+        external_version = get_external_version()
+        return "Response from external service: " + external_version
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5010)  # Указывайте тот же порт, что и в Docker Compose
+    app.run(host='0.0.0.0', port=5000)
