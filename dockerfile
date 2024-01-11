@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . /app
 
 # Установите необходимые пакеты
-RUN pip install flask
+RUN pip install flask requests
 
 # Укажите порт, на котором будет работать приложение
 EXPOSE 5010
