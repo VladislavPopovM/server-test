@@ -8,9 +8,9 @@ import os
 logging.basicConfig(level=logging.DEBUG)
 
 app = Flask(__name__)
-logging.debug("Before loading .env: ", os.getenv("EXTERNAL_SERVICE_URL"))
+logging.debug(f"Before loading .env: {os.getenv('EXTERNAL_SERVICE_URL')}")
 load_dotenv()
-logging.debug("After loading .env: ", os.getenv("EXTERNAL_SERVICE_URL"))
+logging.debug(f"After loading .env: {os.getenv('EXTERNAL_SERVICE_URL')}")
 
 
 def get_external_version():
