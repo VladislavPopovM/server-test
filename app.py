@@ -1,12 +1,16 @@
 from flask import Flask, request
 from dotenv import load_dotenv
 import requests
+import logging
 import os
 
+
+logging.basicConfig(level=logging.DEBUG)
+
 app = Flask(__name__)
-print("Before loading .env: ", os.getenv("EXTERNAL_SERVICE_URL"))
+logging.debug("Before loading .env: ", os.getenv("EXTERNAL_SERVICE_URL"))
 load_dotenv()
-print("After loading .env: ", os.getenv("EXTERNAL_SERVICE_URL"))
+logging.debug("After loading .env: ", os.getenv("EXTERNAL_SERVICE_URL"))
 
 
 def get_external_version():
@@ -33,4 +37,4 @@ def version():
         return "Response from external service: " + external_version
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5010)
+    app.run(host='0.0.0.0', port=5010, debug=True)
