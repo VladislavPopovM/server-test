@@ -34,7 +34,7 @@ def version():
     else:
         # Processing GET request - send a request to an external service
         external_version = get_external_version()
-        return "Response from external service: " + external_version
+        return f"Response from external service: {external_version}"
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5010, debug=True)
