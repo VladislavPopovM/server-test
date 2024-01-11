@@ -14,7 +14,7 @@ def get_external_version():
 
     try:
         response = requests.get(external_url)
-        return response.text
+        return response.json()
     except requests.RequestException as e:
         return f"Error making request to external service: {e}"
 
